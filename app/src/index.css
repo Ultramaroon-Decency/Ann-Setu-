@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 33% 98%;
+    --foreground: 20 14% 16%;
+    --card: 40 30% 96%;
+    --card-foreground: 20 14% 16%;
+    --primary: 24 90% 55%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 142 60% 45%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 30 15% 92%;
+    --muted-foreground: 20 10% 50%;
+    --accent: 45 93% 58%;
+    --accent-foreground: 20 14% 16%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 30 15% 90%;
+    --input: 30 15% 90%;
+    --ring: 24 90% 55%;
+    --radius: 0.75rem;
+    --dashboard-bg: 40 33% 98%; /* #FDFCF8 approx */
+    --sidebar-bg: 18 20% 12%; /* #2D1B14 approx */
+    --accent-orange: 24 85% 55%; /* #EE762B approx */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+  .gradient-hero {
+    background: linear-gradient(
+      180deg,
+      hsl(40 33% 98%) 0%,
+      hsl(30 60% 95%) 50%,
+      hsl(24 80% 92%) 100%
+    );
+  }
+
+  .gradient-warm {
+    background: linear-gradient(135deg, hsl(24 90% 55%) 0%, hsl(35 95% 58%) 50%, hsl(45 93% 58%) 100%);
+  }
+
+  .gradient-green {
+    background: linear-gradient(135deg, hsl(142 60% 45%) 0%, hsl(152 55% 50%) 100%);
+  }
+}
+
+/* Toast notification styles */
+.toast-container {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 9999;
+}
+
+.toast-item {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+  margin-bottom: 0.5rem;
+  animation: toast-in 0.3s ease-out;
+  max-width: 360px;
+}
+
+.toast-item h4 {
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+}
+
+.toast-item p {
+  font-size: 0.8rem;
+  color: hsl(var(--muted-foreground));
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
