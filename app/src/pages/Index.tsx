@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useState, useRef, useEffect } from 'react';
 import { toast } from '@/hooks/use-toast';
+// import logo from '@/assets/logo.png';
 import StoryGallery from '@/components/StoryGallery';
 
 const roles = [
@@ -41,7 +42,6 @@ const Index = () => {
   const [contactEmail, setContactEmail] = useState('');
   const [contactMessage, setContactMessage] = useState('');
   const [expandedFeature, setExpandedFeature] = useState<number | null>(null);
-
   useEffect(() => {
     if (user) {
       navigate(`/dashboard/${user.role}`);
@@ -68,16 +68,19 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {/* Header */}
-      <header className="py-3 px-6 flex items-center justify-between sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
-        <h2 className="font-display text-xl font-bold text-foreground">
-          <span className="text-primary">Ann</span> Setu
-        </h2>
-        <nav className="hidden md:flex items-center gap-6">
-          <button onClick={() => scrollToSection('how-it-works')} className="text-sm font-body text-muted-foreground hover:text-foreground transition-colors">How It Works</button>
-          <button onClick={() => scrollToSection('impact')} className="text-sm font-body text-muted-foreground hover:text-foreground transition-colors">Impact</button>
-          <button onClick={() => scrollToSection('features')} className="text-sm font-body text-muted-foreground hover:text-foreground transition-colors">Features</button>
-          <button onClick={() => scrollToSection('stories')} className="text-sm font-body text-muted-foreground hover:text-foreground transition-colors">Stories</button>
-          <button onClick={() => scrollToSection('contact')} className="text-sm font-body text-muted-foreground hover:text-foreground transition-colors">Contact</button>
+      <header className="py-2 px-0 pl-0 flex items-center justify-center relative sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+        {/* <img src={logo} alt="Ann Setu" className="h-[150px] w-auto object-contain absolute left-0 top-0" /> */}
+        <nav className="flex items-center gap-6">
+          <h2 className="font-display text-xl font-bold text-foreground">
+            <span className="text-primary">Ann</span> Setu
+          </h2>
+          <div className="hidden md:flex items-center gap-4 ml-8">
+            <button onClick={() => scrollToSection('how-it-works')} className="text-sm font-body text-muted-foreground hover:text-foreground transition-colors">How It Works</button>
+            <button onClick={() => scrollToSection('impact')} className="text-sm font-body text-muted-foreground hover:text-foreground transition-colors">Impact</button>
+            <button onClick={() => scrollToSection('features')} className="text-sm font-body text-muted-foreground hover:text-foreground transition-colors">Features</button>
+            <button onClick={() => scrollToSection('stories')} className="text-sm font-body text-muted-foreground hover:text-foreground transition-colors">Stories</button>
+            <button onClick={() => scrollToSection('contact')} className="text-sm font-body text-muted-foreground hover:text-foreground transition-colors">Contact</button>
+          </div>
         </nav>
       </header>
 
@@ -90,38 +93,36 @@ const Index = () => {
             transition={{ duration: 0.7 }}
             className="text-center max-w-2xl mb-16"
           >
-            <div className="w-[120px] h-[120px] mx-auto mb-6 rounded-full bg-primary/10 flex items-center justify-center">
-              <span className="text-6xl animate-bounce">🍲</span>
-            </div>
-            <h1 className="font-display text-6xl md:text-7xl font-extrabold text-[#2D1B14] leading-tight mb-4">
-              Ann <span className="text-[#EE762B]">Setu</span>
+            {/* <img src={logo} alt="Ann Setu Logo" className="w-[200px] h-[200px] mx-auto -mb-6 object-contain" /> */}
+            <h1 className="font-display text-5xl md:text-6xl font-extrabold text-foreground leading-tight mb-4">
+              <span className="text-primary">Ann</span> Setu
             </h1>
-            <p className="text-xl text-[#2D1B14]/70 font-body max-w-lg mx-auto">
-              Connecting surplus food from restaurants and donors to those in need. 
-              <span className="block mt-2 font-bold text-[#EE762B]">Register as and Join the Mission.</span>
+            <p className="text-xl text-muted-foreground font-body">
+              Bridging the gap between surplus food and hungry hearts.
+              <br />
+              <span className="text-secondary font-semibold">No food wasted. No one left hungry.</span>
             </p>
           </motion.div>
 
-          {/* Three Circles - Registration / Sign In Portal */}
-          <div className="flex flex-col md:flex-row items-center gap-12 md:gap-20">
+          {/* Three Circles */}
+          <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16">
             {roles.map((role, i) => (
               <motion.button
                 key={role.key}
                 initial={{ opacity: 0, scale: 0.7 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.3 + i * 0.15, duration: 0.5, type: 'spring' }}
-                whileHover={{ scale: 1.1 }}
+                whileHover={{ scale: 1.08 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => navigate(`/register/${role.key}`)}
-                className="group flex flex-col items-center gap-6 focus:outline-none"
+                onClick={() => navigate(`/login/${role.key}`)}
+                className="group flex flex-col items-center gap-4 focus:outline-none"
               >
-                <div className={`w-40 h-40 md:w-48 md:h-48 rounded-full ${role.color} flex flex-col items-center justify-center shadow-xl group-hover:shadow-orange-200 transition-all duration-300 relative overflow-hidden border-4 border-white`}>
-                  <role.icon className="w-16 h-16 md:w-20 md:h-20 text-white z-10" />
-                  <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className={`w-36 h-36 md:w-44 md:h-44 rounded-full ${role.color} flex items-center justify-center shadow-warm animate-pulse-warm group-hover:animate-none transition-all duration-300`}>
+                  <role.icon className="w-14 h-14 md:w-16 md:h-16 text-primary-foreground" />
                 </div>
                 <div className="text-center">
-                  <h3 className="font-display text-2xl font-bold text-[#2D1B14] group-hover:text-[#EE762B] transition-colors">{role.label}</h3>
-                  <p className="text-sm text-[#2D1B14]/60 max-w-[200px] mt-1 font-medium">Click to Sign In / Register</p>
+                  <h3 className="font-display text-xl font-bold text-foreground">{role.label}</h3>
+                  <p className="text-sm text-muted-foreground max-w-[180px]">{role.desc}</p>
                 </div>
               </motion.button>
             ))}
